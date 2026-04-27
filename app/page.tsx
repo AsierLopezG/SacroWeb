@@ -29,42 +29,48 @@ export default function Home() {
         </Link>
       </section>
 
-      <section className="bg-slate-50 py-32 px-8 border-y border-slate-100 overflow-hidden">
+{/* SECCIÓN CARROUSEL DE RESEÑAS */}
+      <section className="bg-slate-50 py-24 px-4 border-y border-slate-100 overflow-hidden">
         <div className="max-w-4xl mx-auto relative">
-          <div className="text-center mb-16">
+          
+          <div className="text-center mb-12">
             <h2 className="text-sm font-bold uppercase tracking-[4px] text-cyan-500 mb-4">Testimonios</h2>
-            <p className="text-4xl font-medium text-slate-950 italic">Lo que dicen nuestros pacientes</p>
+            <p className="text-3xl md:text-4xl font-medium text-slate-950 italic">Lo que dicen nuestros pacientes</p>
           </div>
 
-          <div className="relative h-[400px] flex items-center justify-center">
+          {/* Contenedor más alto en móvil (500px) para dejar espacio a los botones abajo */}
+          <div className="relative h-[500px] md:h-[400px] flex flex-col items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                className="absolute w-full max-w-lg bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100"
+                /* Tarjeta adaptada para móvil: 95% de ancho */
+                className="absolute w-[95%] max-w-lg bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-slate-100 text-center md:text-left"
               >
-                <Quote className="absolute top-6 right-8 text-slate-50" size={60} />
-                <div className="flex text-yellow-400 mb-6">
+                <Quote className="hidden md:block absolute top-6 right-8 text-slate-50" size={60} />
+                <div className="flex justify-center md:justify-start text-yellow-400 mb-6">
                   {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
                 </div>
-                <p className="text-xl text-slate-900 leading-relaxed italic mb-8 font-medium">{reseñas[index].texto}</p>
+                <p className="text-lg md:text-xl text-slate-900 leading-relaxed italic mb-8 font-medium">{reseñas[index].texto}</p>
                 <p className="font-bold text-xs uppercase tracking-widest text-slate-950 pt-6 border-t border-slate-50">
                   — {reseñas[index].autor}
                 </p>
               </motion.div>
             </AnimatePresence>
 
-            <div className="absolute w-full flex justify-between items-center px-4 pointer-events-none">
-              <button onClick={anterior} className="pointer-events-auto p-4 bg-white rounded-full shadow-lg hover:bg-slate-50 border border-slate-100 transition-all">
+            {/* CONTROLES: Abajo en móvil (bottom-0), a los lados en PC (top-1/2) */}
+            <div className="absolute bottom-0 md:top-1/2 md:-translate-y-1/2 w-full flex justify-center md:justify-between gap-6 px-4 pointer-events-none">
+              <button onClick={anterior} className="pointer-events-auto p-4 bg-white rounded-full shadow-lg hover:bg-slate-50 border border-slate-200 transition-all">
                 <ChevronLeft size={24} className="text-slate-950" />
               </button>
-              <button onClick={siguiente} className="pointer-events-auto p-4 bg-white rounded-full shadow-lg hover:bg-slate-50 border border-slate-100 transition-all">
+              <button onClick={siguiente} className="pointer-events-auto p-4 bg-white rounded-full shadow-lg hover:bg-slate-50 border border-slate-200 transition-all">
                 <ChevronRight size={24} className="text-slate-950" />
               </button>
             </div>
           </div>
+
         </div>
       </section>
     </main>
