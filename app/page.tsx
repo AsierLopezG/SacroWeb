@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from 'next/link';
-import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight, Quote, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from "framer-motion";
 
 const reseñas = [
@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <main className="pt-32 md:pt-40 bg-white overflow-hidden">
       
-      {/* SECCIÓN PRINCIPAL CON EFECTO "APPLE" (Aparición suave) */}
+      {/* SECCIÓN PRINCIPAL CON EFECTO "APPLE" */}
       <section className="px-4 md:px-8 text-center mb-24 md:mb-32 max-w-4xl mx-auto">
         <motion.h1 
           initial={{ opacity: 0, y: 30 }}
@@ -49,14 +49,13 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* CINTA INFINITA (MARQUEE) - El toque premium */}
+      {/* CINTA INFINITA (MARQUEE) */}
       <div className="bg-slate-950 py-4 md:py-6 transform -rotate-2 scale-105 shadow-2xl overflow-hidden mb-24 md:mb-32">
         <motion.div 
           animate={{ x: [0, -1035] }}
           transition={{ repeat: Infinity, ease: "linear", duration: 20 }}
           className="flex whitespace-nowrap gap-8 md:gap-16 items-center"
         >
-          {/* Repetimos las palabras para que el bucle no se corte */}
           {[...Array(3)].map((_, i) => (
             <div key={i} className="flex gap-8 md:gap-16 items-center text-white text-sm md:text-base font-black uppercase tracking-[4px]">
               <span>Osteopatía</span>
@@ -73,7 +72,7 @@ export default function Home() {
       </div>
 
       {/* SECCIÓN CARROUSEL DE RESEÑAS */}
-      <section className="bg-slate-50 py-24 px-4 border-y border-slate-100 overflow-hidden">
+      <section className="bg-slate-50 py-24 px-4 border-t border-slate-100 overflow-hidden">
         <div className="max-w-4xl mx-auto relative">
           
           <div className="text-center mb-12">
@@ -112,6 +111,49 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* NUEVA SECCIÓN: MAPA Y LOCALIZACIÓN */}
+      <section className="bg-white py-24 px-4 md:px-8 border-t border-slate-100">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          
+          <div className="space-y-8">
+            <div>
+              <h2 className="text-sm font-bold uppercase tracking-[4px] text-cyan-500 mb-4">Dónde encontrarnos</h2>
+              <h3 className="text-4xl md:text-5xl font-medium text-slate-950 italic leading-tight">Tu clínica en el <br/> corazón de Usera</h3>
+            </div>
+            
+            <p className="text-lg text-slate-600 leading-relaxed max-w-md">
+              Estamos a pie de calle, en unas instalaciones modernas y preparadas para ofrecerte el mejor entorno de recuperación.
+            </p>
+
+            <div className="flex items-start gap-4 p-6 bg-slate-50 rounded-3xl border border-slate-100 max-w-sm">
+               <div className="bg-white p-3 rounded-full shadow-sm">
+                   <MapPin className="text-cyan-600" size={24} />
+               </div>
+               <div>
+                  <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-1">Dirección</p>
+                  <p className="text-slate-950 font-bold text-lg leading-snug">C. de Ramón Luján, 45<br/>28026, Madrid</p>
+               </div>
+            </div>
+          </div>
+
+          {/* EL MAPA INCRUSTADO */}
+          <div className="h-[400px] md:h-[500px] w-full rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white relative bg-slate-100">
+            <iframe 
+              src="https://maps.google.com/maps?q=C.%20de%20Ram%C3%B3n%20Luj%C3%A1n,%2045,%20Usera,%20Madrid&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              className="absolute inset-0 grayscale-[20%] contrast-125"
+            ></iframe>
+          </div>
+
+        </div>
+      </section>
+
     </main>
   );
 }
